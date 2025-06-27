@@ -5,12 +5,12 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.*;
 
-import static jdk.vm.ci.hotspot.JFR.Ticks.now;
-
+@Service
 public class TokenService {
     @Value("{api.security.token.secret}")
     public String secret;
@@ -20,7 +20,10 @@ public class TokenService {
                 .setSubject(payload.getSubject()) // ID único do usuário no Google
                 .claim("email", payload.getEmail())
                 .claim("name", (String) payload.get("name"))
-                .setIssuedAt(new Date(now()))
+                .setIssuedAt((Date) Date.from(
+                        ZonedDateTime.now(ZoneOffset.of("-03:00"))
+                                .toInstant()
+                ))
                 .setExpiration(expirationDate())
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();

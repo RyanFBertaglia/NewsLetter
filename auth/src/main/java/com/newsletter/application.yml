@@ -1,9 +1,0 @@
-spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: CLIENT_ID_GOOGLE
-            client-secret: CLIENT_SECRET_GOOGLE
-            scope: openid,email,profile  # Escopos para acessar dados básicos

@@ -1,8 +1,6 @@
 package com.newsletter.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,15 +20,22 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
+@Table(name = "users")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+    @SequenceGenerator(name = "users_seq", sequenceName = "users_seq", allocationSize = 1)
+    private Integer id;
+
     private String email;
     private String nome;
     private int compartilhados;
     private Date validade;
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "user_role")
     private Role role;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -10,7 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,7 +19,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Component
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
@@ -30,6 +29,8 @@ public class User implements UserDetails {
     private String email;
     private String nome;
     private int compartilhados;
+
+    @Temporal(TemporalType.DATE)
     private Date validade;
 
     @Enumerated(EnumType.STRING)

@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = {User.class})
-public class TesteLombok {
+public class TestLombok {
 
     User user = new User();
     @Test

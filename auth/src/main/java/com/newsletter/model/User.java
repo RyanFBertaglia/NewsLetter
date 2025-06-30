@@ -5,12 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,17 +27,22 @@ public class User implements UserDetails {
     @SequenceGenerator(name = "users_seq", sequenceName = "users_seq", allocationSize = 1)
     private Integer id;
 
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "compartilhados")
     private int compartilhados;
 
-    @Temporal(TemporalType.DATE)
-    private Date validade;
+    @Column(name = "validade")
+    private LocalDate validade;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "user_role")
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "role", nullable = false)
     private Role role;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

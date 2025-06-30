@@ -1,11 +1,9 @@
 package com.newsletter.model;
 
-public enum Role {
-    USER("user"),
-    ADMIN("admin");
+import lombok.Getter;
 
-    final String role;
-    Role(String role) {
-        this.role = role;
-    }
+@Getter
+public enum Role {
+    USER,
+    ADMIN;
 }

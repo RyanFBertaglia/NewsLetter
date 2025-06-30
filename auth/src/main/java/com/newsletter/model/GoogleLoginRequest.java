@@ -1,4 +1,4 @@
 package com.newsletter.model;
 
-public record GoogleLoginRequest(String idToken) {
+public record GoogleLoginRequest(String idToken, String nome) {
 }

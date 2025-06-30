@@ -1,57 +1,63 @@
 package com.newsletter.service;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.newsletter.exception.TokenInvalido;
+import com.newsletter.model.UserDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.time.*;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Service
 public class TokenService {
-    @Value("{api.security.token.secret}")
-    public String secret;
 
-    public String generateTokenFromGooglePayload(GoogleIdToken.Payload payload) {
+    @Autowired
+    UserService userService;
+
+    @Value("${api.security.token.secret}")
+    private String secret;
+
+    private Key getSigningKey() {
+        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public String generateTokenFromGooglePayload(GoogleIdToken.Payload payload, String nome) {
         return Jwts.builder()
-                .setSubject(payload.getSubject()) // ID único do usuário no Google
+                .setSubject(payload.getSubject())
                 .claim("email", payload.getEmail())
-                .claim("name", (String) payload.get("name"))
-                .setIssuedAt((Date) Date.from(
-                        ZonedDateTime.now(ZoneOffset.of("-03:00"))
-                                .toInstant()
-                ))
+                .claim("name", nome)
+                .setIssuedAt(currentTime())
                 .setExpiration(expirationDate())
-                .signWith(SignatureAlgorithm.HS256, secret)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    public boolean validateToken(String token) {
+    public UserDTO validateToken(String token) {
         try {
-            Jwts.parser()
-                    .setSigningKey(secret)
-                    .parseClaimsJws(token);
-            return true;
+            Claims user = Jwts.parser()
+                    .setSigningKey(getSigningKey())
+                    .parseClaimsJws(token)
+                    .getBody();
+            return this.userService.getUserDatails(user.get("email", String.class));
         } catch (Exception e) {
-            return false;
+            throw new TokenInvalido("Token Inválido");
         }
     }
 
-    public Claims getClaimsFromToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(token)
-                .getBody();
+    private Date currentTime() {
+        return Date.from(ZonedDateTime.now(ZoneId.of("America/Sao_Paulo")).toInstant());
     }
 
     private Date expirationDate() {
-        return (Date) Date.from(
-                ZonedDateTime.now(ZoneOffset.of("-03:00"))
-                        .plusHours(2)
-                        .toInstant()
-        );
+        return Date.from(ZonedDateTime.now(ZoneId.of("America/Sao_Paulo")).plusHours(2).toInstant());
     }
 }

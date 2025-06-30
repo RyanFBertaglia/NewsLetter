@@ -1,5 +1,6 @@
 package com.newsletter.service;
 
+import com.newsletter.exception.UserAlreadyExists;
 import com.newsletter.exception.UserNotFound;
 import com.newsletter.model.Role;
 import com.newsletter.model.User;
@@ -37,7 +38,7 @@ public class UserService {
     public void createUser(String email, String nome) {
         try {
             if (userRepository.findByEmail(email).isPresent()) {
-                throw new RuntimeException("Usuário com e-mail " + email + " já existe.");
+                throw new UserAlreadyExists("Usuário com e-mail " + email + " já existe.");
             }
 
             User user = new User();

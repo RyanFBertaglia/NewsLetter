@@ -26,13 +26,16 @@ export default function Signup() {
     };
 
     try {
-      const res = await api.post('/auth/google-register', { idToken, nome: name });
+      const res = await api.post('/auth/google-register', {});
       if (res.status === 200) return saveTokenAndRedirect(res.data);
     } catch (err) {
       if (err.response?.status === 409) {
         try {
           const loginRes = await api.post('/auth/google-login', { idToken });
-          if (loginRes.status === 200) return saveTokenAndRedirect(loginRes.data);
+          if (loginRes.status === 200) {
+            console.log(loginRes.data);
+            return saveTokenAndRedirect(loginRes.data);
+          } 
         } catch (e) {
           alert('Falha no login: ' + (e.response?.data || e.message));
         }

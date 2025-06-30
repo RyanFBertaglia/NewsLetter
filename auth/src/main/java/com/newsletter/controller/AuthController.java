@@ -7,15 +7,22 @@ import com.newsletter.service.GoogleTokenVerifier;
 import com.newsletter.service.TokenService;
 import com.newsletter.service.UserService;
 import com.nimbusds.jwt.JWT;
+import com.stripe.exception.StripeException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.nio.file.Paths;
+
+import com.stripe.Stripe;
+import com.stripe.model.checkout.Session;
+import com.stripe.param.checkout.SessionCreateParams;
+
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("auth")
 public class AuthController {
 
@@ -27,6 +34,18 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+
+    @Value("${stripe.api.key}")
+    private String stripeApiKey;
+
+    @Value("${stripe.success.url}")
+    private String successUrl;
+
+    @Value("${stripe.cancel.url}")
+    private String cancelUrl;
+
+    @Value("${stripe.price.id}")
+    private String priceId;
 
     @PostMapping("/google-login")
     public ResponseEntity<String> googleLogin(@RequestBody GoogleLoginRequest request) {
@@ -60,10 +79,33 @@ public class AuthController {
         return ResponseEntity.ok().body(jwtTokenService.validateToken(token));
     }
 
-
     @PostMapping("/vencimento")
     public ResponseEntity<?> validateMensalidade(@RequestBody JWT request) {
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/pagamento")
+    public ResponseEntity<?> createCheckoutSession() {
+        Stripe.apiKey = stripeApiKey;
+
+        SessionCreateParams params = SessionCreateParams.builder()
+                .setMode(SessionCreateParams.Mode.PAYMENT)
+                .setSuccessUrl(successUrl)
+                .setCancelUrl(cancelUrl)
+                .addLineItem(
+                        SessionCreateParams.LineItem.builder()
+                                .setQuantity(1L)
+                                .setPrice(priceId)
+                                .build()
+                )
+                .build();
+
+        try {
+            Session session = Session.create(params);
+            return ResponseEntity.ok(session.getUrl());
+        } catch (StripeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar sessão: " + e.getMessage());
+        }
     }
 }
 

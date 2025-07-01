@@ -1,4 +1,3 @@
-// src/App.js
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
@@ -12,7 +11,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cadastro" element={<Signup />} />
         <Route path="/pagamento" element={<Payment />} />
-        <Route path="/obrigado" element={<ThankYou />} />
+        <Route path="/pagamento/success" element={<ThankYou />} />
       </Routes>
     </BrowserRouter>
   );

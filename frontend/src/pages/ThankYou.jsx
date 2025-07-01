@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { api } from '../services/api';
+
 
 const ThankYou = () => {
   const [message, setMessage] = useState('');
@@ -9,11 +11,20 @@ const ThankYou = () => {
     const query = new URLSearchParams(window.location.search);
     
     if (query.get('success')) {
-      setMessage('Pagamento realizado com sucesso! Você receberá um e-mail de confirmação.');
+      try {
+        const response = await api.post('/auth/renovar', {}, {
+          headers: {
+                'Authorization': `Bearer ${userToken}`
+          }
+        });
+        } catch (err) {
+          setError(err.response?.data || err.message || 'Erro ao atualizar status');
+          setIsLoading(false);
+        }
+      setMessage('Pagamento realizado com sucesso! O serviço já foi adquirido, a entrega será feita no seu email.');
     } else if (query.get('canceled')) {
       setMessage('Pagamento cancelado. Você pode tentar novamente quando quiser.');
     } else {
-      // Redirect to home if no status
       navigate('/');
     }
   }, [navigate]);

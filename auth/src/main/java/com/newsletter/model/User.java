@@ -67,11 +67,16 @@ public class User implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return validade == null || validade.isAfter(LocalDate.now());
     }
 
     @Override
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
     }
+
+    public void renovarValidade() {
+        this.validade = LocalDate.now().plusMonths(1);
+    }
+
 }

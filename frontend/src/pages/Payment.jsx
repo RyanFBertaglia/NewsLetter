@@ -11,14 +11,12 @@ const Payment = ({ userToken }) => {
     setError('');
     
     try {
-      // Usando axios corretamente - não precisa passar method, headers manualmente
       const response = await api.post('/auth/pagamento', {}, {
         headers: {
           'Authorization': `Bearer ${userToken}`
         }
       });
       
-      // Com axios, a resposta já vem processada
       const sessionUrl = response.data;
       window.location.href = sessionUrl;
     } catch (err) {

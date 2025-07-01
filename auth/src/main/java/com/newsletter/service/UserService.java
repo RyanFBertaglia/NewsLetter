@@ -54,4 +54,9 @@ public class UserService {
             throw new RuntimeException("Erro ao salvar usuário: " + e.getMessage(), e);
         }
     }
+
+    public void renovarValidade(User user) {
+        user.renovarValidade();
+        userRepository.save(user);
+    }
 }

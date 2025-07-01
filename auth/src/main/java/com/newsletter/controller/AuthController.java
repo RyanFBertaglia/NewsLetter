@@ -3,15 +3,18 @@ package com.newsletter.controller;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.newsletter.exception.TokenInvalido;
 import com.newsletter.model.GoogleLoginRequest;
+import com.newsletter.model.User;
 import com.newsletter.service.GoogleTokenVerifier;
 import com.newsletter.service.TokenService;
 import com.newsletter.service.UserService;
 import com.nimbusds.jwt.JWT;
 import com.stripe.exception.StripeException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Paths;
@@ -81,6 +84,13 @@ public class AuthController {
 
     @PostMapping("/vencimento")
     public ResponseEntity<?> validateMensalidade(@RequestBody JWT request) {
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("renovar")
+    public ResponseEntity<?> addVencimento(HttpServletRequest request) {
+        User user = jwtTokenService.getUser(request);
+        userService.renovarValidade(user);
         return ResponseEntity.ok().build();
     }
 

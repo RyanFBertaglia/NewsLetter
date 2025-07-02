@@ -12,7 +12,7 @@ const ThankYou = () => {
     
     if (query.get('success')) {
       try {
-        const response = await api.post('/auth/renovar', {}, {
+        const response = api.post('/auth/renovar', {}, {
           headers: {
                 'Authorization': `Bearer ${userToken}`
           }

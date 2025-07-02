@@ -12,6 +12,7 @@ function App() {
         <Route path="/cadastro" element={<Signup />} />
         <Route path="/pagamento" element={<Payment />} />
         <Route path="/pagamento/success" element={<ThankYou />} />
+        <Route path="/pagamento/canceled" element={<ThankYou />} />
       </Routes>
     </BrowserRouter>
   );

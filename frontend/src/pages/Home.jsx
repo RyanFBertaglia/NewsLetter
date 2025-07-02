@@ -4,7 +4,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className="min-h-screen flex flex-col">
       <h1 className="text-3xl font-bold mb-8">Bem-vindo à Nossa Plataforma</h1>
       
       <button

@@ -1,0 +1,1 @@
+docker exec -it database-auth psql ryan banco-de-dados

@@ -1,6 +1,6 @@
 package com.newsletter.controller;
 
-import com.newsletter.dto.DelayedMessageRequest;
+import com.newsletter.model.DelayedMessageRequest;
 import com.newsletter.service.MessageProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

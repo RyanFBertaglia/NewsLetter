@@ -1,6 +1,6 @@
 package com.newsletter.service;
 
-import com.newsletter.dto.DelayedMessageRequest;
+import com.newsletter.model.DelayedMessageRequest;
 import com.newsletter.infra.RabbitMQConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

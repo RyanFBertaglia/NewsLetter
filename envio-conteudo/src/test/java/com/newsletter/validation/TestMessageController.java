@@ -2,7 +2,7 @@ package com.newsletter.validation;
 
 import com.newsletter.infra.TestConfigurationSender;
 import com.newsletter.controller.MessageController;
-import com.newsletter.dto.DelayedMessageRequest;
+import com.newsletter.model.DelayedMessageRequest;
 import com.newsletter.service.MessageProducer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

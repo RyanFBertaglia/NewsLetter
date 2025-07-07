@@ -2,5 +2,6 @@
 
 auth/target/*
 envio-conteudo/target/*
+enviar/target/*
 .env
 *.properties

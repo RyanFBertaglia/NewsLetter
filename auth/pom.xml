@@ -42,7 +42,6 @@
             <version>29.2.0</version>
         </dependency>
 
-        <!-- Biblioteca JWT (jjwt) -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>

@@ -1,6 +1,6 @@
 .idea
-auth/src/main/resources/application.properties
-envio-conteudo/src/main/resources/application.properties
+
 auth/target/*
 envio-conteudo/target/*
 .env
+*.properties

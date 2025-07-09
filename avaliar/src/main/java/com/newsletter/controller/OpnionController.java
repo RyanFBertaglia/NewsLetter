@@ -1,6 +1,6 @@
 package com.newsletter.controller;
 
-import com.newsletter.model.MessageOpnion;
+import com.newsletter.model.MessageOpinion;
 import com.newsletter.service.SentimentAnalysis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class OpnionController {
     }
 
     @PostMapping("/sendComment")
-    public ResponseEntity<String> sendComment(@RequestBody MessageOpnion message) {
+    public ResponseEntity<String> sendComment(@RequestBody MessageOpinion message) {
         double rate = opnionService.analyzeSentiment(message);
         return ResponseEntity.ok(""+rate);
     }

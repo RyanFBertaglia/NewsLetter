@@ -12,6 +12,9 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.lang.String;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 @Slf4j
 @SpringBootTest(classes = {SentimentAnalysis.class})
@@ -26,13 +29,12 @@ public class TestGetOpnion {
     @Autowired
     public TestGetOpnion(SentimentAnalysis analysis) {
         this.analysis = analysis;
-        log.info(comments.toString());
     }
 
 
-    MessageOpinion messageLiked = new MessageOpinion("Eu não gostei", LocalDate.of(2025, 2, 10));
-    MessageOpinion messageDoesNotLiked = new MessageOpinion("Eu gostei muito do serviço", LocalDate.of(2025, 2, 10));
-    MessageOpinion messageDoesNotMatter = new MessageOpinion("A cor do email é amarela", LocalDate.of(2025, 2, 10));
+    MessageOpinion messageLiked = new MessageOpinion("Eu gostei muito do serviço, recomendo", LocalDate.of(2025, 2, 10));
+    MessageOpinion messageDoesNotLiked = new MessageOpinion("Eu não gostei, não usaria novamente", LocalDate.of(2025, 2, 10));
+    MessageOpinion messageDoesNotMatter = new MessageOpinion("A página do email é ali", LocalDate.of(2025, 2, 10));
 
 
     Map<String, MessageOpinion> comments = Map.of(
@@ -46,6 +48,7 @@ public class TestGetOpnion {
     public void userLiked() {
         double grade = analysis.analyzeSentiment(comments.get("Liked"));
         log.info("User that liked has the grade: {}", grade);
+        assertTrue(grade > 8);
     }
 
 
@@ -53,6 +56,7 @@ public class TestGetOpnion {
     public void userDoesNotLiked() {
         double grade = analysis.analyzeSentiment(comments.get("DN Liked"));
         log.info("User that doesn't liked has the grade: {}", grade);
+        assertTrue(grade < 5);
     }
 
 
@@ -60,6 +64,7 @@ public class TestGetOpnion {
     public void userIndiferent() {
         double grade = analysis.analyzeSentiment(comments.get("Not opined"));
         log.info("User that has not opined has the grade: {}", grade);
+        assertTrue(grade > 4 && grade < 6);
     }
 }
 

@@ -3,5 +3,6 @@
 auth/target/*
 envio-conteudo/target/*
 enviar/target/*
+avaliar/target/*
 .env
 *.properties

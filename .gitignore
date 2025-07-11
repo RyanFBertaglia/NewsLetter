@@ -6,3 +6,4 @@ enviar/target/*
 avaliar/target/*
 .env
 *.properties
+todo.txt

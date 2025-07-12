@@ -32,9 +32,9 @@ public class TestGetOpnion {
     }
 
 
-    MessageOpinion messageLiked = new MessageOpinion("Eu gostei muito do serviço, recomendo", LocalDate.of(2025, 2, 10));
-    MessageOpinion messageDoesNotLiked = new MessageOpinion("Eu não gostei, não usaria novamente", LocalDate.of(2025, 2, 10));
-    MessageOpinion messageDoesNotMatter = new MessageOpinion("A página do email é ali", LocalDate.of(2025, 2, 10));
+    MessageOpinion messageLiked = new MessageOpinion("Eu gostei muito do serviço, recomendo", 10L);
+    MessageOpinion messageDoesNotLiked = new MessageOpinion("Eu não gostei, não usaria novamente", 210L);
+    MessageOpinion messageDoesNotMatter = new MessageOpinion("A página do email é ali", 5438252L);
 
 
     Map<String, MessageOpinion> comments = Map.of(

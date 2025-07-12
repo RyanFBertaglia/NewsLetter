@@ -16,7 +16,7 @@ public class Rating {
     @Column(name = "dia")
     private LocalDate dia;
 
-    @Column(name = "idUser")
+    @Column(name = "id-user")
     private long idUser;
 
     @Column(name = "comentario")

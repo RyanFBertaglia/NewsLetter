@@ -37,10 +37,12 @@ public class TokenService {
     }
 
     public String generateTokenFromGooglePayload(GoogleIdToken.Payload payload, String nome) {
+        long idUser = userRepository.getIdByEmail(payload.getEmail());
         return Jwts.builder()
                 .setSubject(payload.getSubject())
                 .claim("email", payload.getEmail())
                 .claim("name", nome)
+                .claim("idUser", idUser)
                 .setIssuedAt(currentTime())
                 .setExpiration(expirationDate())
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)

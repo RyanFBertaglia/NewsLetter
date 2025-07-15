@@ -33,7 +33,7 @@ public class UsersDataSourceConfig {
             @Qualifier("usersDataSource") DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
-        em.setPackagesToScan("com.newsletter.model.user"); // Pacote da entidade Users
+        em.setPackagesToScan("com.newsletter.model.user");
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         return em;
     }

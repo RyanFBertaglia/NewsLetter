@@ -32,7 +32,7 @@ public class FeedbackDataSourceConfig {
             @Qualifier("feedbackDataSource") DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
-        em.setPackagesToScan("com.newsletter.model.feedback"); // Pacote da entidade Users
+        em.setPackagesToScan("com.newsletter.model.feedback.feedback");
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         return em;
     }

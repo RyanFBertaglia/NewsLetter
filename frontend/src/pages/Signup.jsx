@@ -26,7 +26,9 @@ export default function Signup() {
     };
 
     try {
-      const res = await api.post('/auth/google-register', {});
+        nome = name;
+        consele.log(idToken, nome);
+      const res = await api.post('/auth/google-register', {idToken, nome});
       if (res.status === 200) return saveTokenAndRedirect(res.data);
     } catch (err) {
       if (err.response?.status === 409) {

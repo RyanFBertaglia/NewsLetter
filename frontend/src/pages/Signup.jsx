@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
+import { googleAuth } from '../services/authService';
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -20,33 +21,16 @@ export default function Signup() {
   const handleGoogleAuth = async (idToken) => {
     if (!validateName()) return;
     setIsLoading(true);
-    const saveTokenAndRedirect = (token) => {
-      localStorage.setItem('jwtToken', token);
-      navigate('/pagamento');
-    };
 
     try {
-        nome = name;
-        consele.log(idToken, nome);
-      const res = await api.post('/auth/google-register', {idToken, nome});
-      if (res.status === 200) return saveTokenAndRedirect(res.data);
-    } catch (err) {
-      if (err.response?.status === 409) {
-        try {
-          const loginRes = await api.post('/auth/google-login', { idToken });
-          if (loginRes.status === 200) {
-            console.log(loginRes.data);
-            return saveTokenAndRedirect(loginRes.data);
-          } 
-        } catch (e) {
-          alert('Falha no login: ' + (e.response?.data || e.message));
-        }
-      } else {
-        alert('Falha no registro: ' + (err.response?.data || err.message));
-        console.log(err.response?.data);
-      }
+        console.log(idToken, name);
+        const tokenJwt = await googleAuth(name, idToken);
+        navigate('/pagamento');
+    } catch (e) {
+        alert('Falha no registro: ' + (e.response?.data || e.message));
+        console.log(e.response?.data);
     } finally {
-      setIsLoading(false);
+        setIsLoading(false);
     }
   };
 

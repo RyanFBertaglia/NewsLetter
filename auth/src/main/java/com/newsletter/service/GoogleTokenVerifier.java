@@ -8,6 +8,8 @@ import com.newsletter.exception.TokenInvalido;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.Collections;
 
 @Service
@@ -19,15 +21,23 @@ public class GoogleTokenVerifier {
         this.googleClientId = googleClientId;
     }
 
-    public GoogleIdToken.Payload verifyToken(String idToken) throws Exception {
-        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(
-                new NetHttpTransport(),
-                new GsonFactory()
-        )
-                .setAudience(Collections.singletonList(googleClientId))
-                .build();
+    public GoogleIdToken.Payload verifyToken(String idToken) {
 
-        GoogleIdToken googleIdToken = verifier.verify(idToken);
+        GoogleIdToken googleIdToken = null;
+        try {
+            GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(
+                    new NetHttpTransport(),
+                    new GsonFactory()
+            )
+                    .setAudience(Collections.singletonList(googleClientId))
+                    .build();
+
+            googleIdToken = verifier.verify(idToken);
+        } catch (GeneralSecurityException | IOException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (RuntimeException e) {
+            throw new TokenInvalido();
+        }
         if (googleIdToken != null) return googleIdToken.getPayload();
         throw new TokenInvalido();
     }

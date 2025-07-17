@@ -24,6 +24,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB_AUTH}
     ports:
       - "5432:5432"
+    volumes:
+      - db-auth-data:/var/lib/postgresql/data
     networks:
           - app-network
     restart: unless-stopped
@@ -39,14 +41,12 @@ services:
       - "5433:5432"
     networks:
       - app-network
+    volumes:
+      - db-avaliacao-data:/var/lib/postgresql/data
     restart: unless-stopped
 
   auth:
     container_name: auth
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://database-auth:5432/${POSTGRES_DB_AVALIACAO}
-      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
-      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
     build: ./auth
     ports:
       - "8080:8080"

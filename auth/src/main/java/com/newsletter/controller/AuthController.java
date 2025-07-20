@@ -87,7 +87,7 @@ public class AuthController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("renovar")
+    @PostMapping("/renovar")
     public ResponseEntity<String> addVencimento(HttpServletRequest request) {
         User user = jwtTokenService.getUser(request);
         userService.renovarValidade(user);

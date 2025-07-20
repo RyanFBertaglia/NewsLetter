@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .cors(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll() // Temporarily allow all
+                        .anyRequest().permitAll()
                 );
         return http.build();
     }

@@ -62,3 +62,4 @@ Para conseguir o máximo de controle sobre os componentes deste projeto separei 
 * SendGrid - Serviço de e-mail
 * Inteligência Artificial (huggingface) - Análise de sentimento presente em comentários
 * PostgreSQL - Banco de dados para users e feedback
+* Stripe - API de pagamentos para compra do serviço

@@ -33,7 +33,7 @@ public class User implements UserDetails {
     private String nome;
 
     @Column(name = "compartilhados")
-    private int compartilhados;
+    private int compartilhados = 0;
 
     @Column(name = "validade")
     private LocalDate validade;

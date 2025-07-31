@@ -7,9 +7,9 @@ import com.newsletter.exception.VersionNotFound;
 import com.newsletter.model.feedback.Rate;
 import com.newsletter.dto.RateAverageDTO;
 import com.newsletter.dto.UserShareDTO;
-import com.newsletter.repository.CommentsRepository;
-import com.newsletter.repository.RateRepository;
-import com.newsletter.repository.UserRepository;
+import com.newsletter.repository.feedback.CommentsRepository;
+import com.newsletter.repository.feedback.RateRepository;
+import com.newsletter.repository.user.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,11 +22,11 @@ import java.util.Optional;
 public class Statistics {
 
     private final RateRepository ratings;
-    private final UserRepository users;
+    private final UsersRepository users;
     private final CommentsRepository comments;
 
     @Autowired
-    public Statistics(RateRepository ratings, UserRepository users, CommentsRepository comments) {
+    public Statistics(RateRepository ratings, UsersRepository users, CommentsRepository comments) {
         this.ratings = ratings;
         this.users = users;
         this.comments = comments;
@@ -59,7 +59,7 @@ public class Statistics {
     public RatingDatailsDTO getRatingDatails(long version) {
         Rate rate = ratings.findById(version)
                 .orElseThrow(VersionNotFound::new);
-        List<UserCommentDTO> usersComments = comments.findAllByVersion(version);
+        List<UserCommentDTO> usersComments = comments.findByVersion(version);
 
         return new RatingDatailsDTO(rate.getVersion(),
                 rate.getDate_rate(),

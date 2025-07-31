@@ -7,6 +7,7 @@ import org.hibernate.type.SqlTypes;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "users")
 public class Users {
 
     @Id
@@ -20,6 +21,6 @@ public class Users {
     private String nome;
 
     @Column(name = "compartilhados")
-    private int compartilhados;
+    private int compartilhados = 0;
 
 }

@@ -1,4 +1,4 @@
 package com.newsletter.dto;
 
-public record UserCommentDTO(String email, String message) {
+public record UserCommentDTO(long id, String message) {
 }

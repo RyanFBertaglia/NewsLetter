@@ -1,6 +1,6 @@
 package com.newsletter.service;
 
-import com.newsletter.model.UserRepository;
+import com.newsletter.model.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,9 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UsersRepository usersRepository;
 
     public List<String> getUser() {
-        return userRepository.getValidEmails();
+        return usersRepository.getValidEmails();
     }
 }

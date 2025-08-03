@@ -1,6 +1,6 @@
 package com.newsletter;
 
-import com.newsletter.model.UserRepository;
+import com.newsletter.model.UsersRepository;
 import com.newsletter.service.SenderService;
 import com.newsletter.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 public class TestSenderEmail {
 
     @MockitoBean
-    private UserRepository userRepository;
+    private UsersRepository usersRepository;
 
     private final SenderService senderService;
 

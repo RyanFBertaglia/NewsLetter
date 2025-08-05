@@ -22,22 +22,22 @@ public class RepercussaoController {
         this.statistics = statistics;
     }
 
-    @PostMapping("/getAverage/{version}")
+    @GetMapping("/getAverage/{version}")
     public ResponseEntity<Double> getAverageByVersion(@PathVariable Long version) {
         return ResponseEntity.ok(statistics.findAverage(version));
     }
 
-    @PostMapping("/getAverageOnDay")
+    @GetMapping("/getAverageOnDay")
     public ResponseEntity<List<RateAverageDTO>> getMediaByDay(@RequestBody LocalDate date) {
         return ResponseEntity.ok(statistics.findAverageByDay(date));
     }
 
-    @PostMapping("/getAllMedias")
+    @GetMapping("/getAllMedias")
     public ResponseEntity<List<Rate>> getAllMedias() {
         return ResponseEntity.ok(statistics.getAllRatings());
     }
 
-    @PostMapping("/getShares")
+    @GetMapping("/getShares")
     public ResponseEntity<List<UserShareDTO>> getAllShares() {
         return ResponseEntity.ok(statistics.getShares());
     }

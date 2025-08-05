@@ -18,6 +18,10 @@ const Payment = ({ userToken }) => {
       });
       
       const sessionUrl = response.data;
+      if(sessionUrl == 'http://localhost:3000/pagamento/success') {
+        renovado = await api.post('/auth/renovar');
+        console.log(renovado.data);
+      }
       window.location.href = sessionUrl;
     } catch (err) {
       setError(err.response?.data || err.message || 'Erro ao processar pagamento');

@@ -2,10 +2,6 @@ package com.newsletter.service;
 
 
 import com.newsletter.model.MessageOpinion;
-import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -17,12 +13,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 
-//@Slf4j
 @Service
 public class SentimentAnalysis {
-
-
-    private static final Logger log = LoggerFactory.getLogger(SentimentAnalysis.class);
 
     @Value("${huggingface.api.url}")
     private String apiUrl;
@@ -58,13 +50,10 @@ public class SentimentAnalysis {
                     ? response.getBody().get(0)
                     : Collections.emptyList();
 
-            log.info(predictions.toString());
-
             return convertToScore(predictions);
 
 
         } catch (Exception e) {
-            log.info("Erro while analysis: {}", String.valueOf(e.getCause()));
             return 5.0;
         }
     }
@@ -72,7 +61,6 @@ public class SentimentAnalysis {
 
     private double convertToScore(List<Map<String, Object>> predictions) {
         if (predictions == null || predictions.isEmpty()) {
-            log.info("Response null or empty. Returning default grade");
             return 5.0;
         }
 

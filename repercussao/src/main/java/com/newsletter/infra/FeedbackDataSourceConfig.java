@@ -13,6 +13,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.Objects;
+import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories(
@@ -33,6 +34,12 @@ public class FeedbackDataSourceConfig {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
         em.setPackagesToScan("com.newsletter.model.feedback");
+        Properties jpaProps = new Properties();
+
+        jpaProps.put("hibernate.hbm2ddl.auto", "update");
+        jpaProps.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+
+        em.setJpaProperties(jpaProps);
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         return em;
     }

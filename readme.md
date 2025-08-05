@@ -51,6 +51,14 @@ Para conseguir o máximo de controle sobre os componentes deste projeto separei 
 * Gerencia comentários dos produtos
 * Identifica usuários com mais taxas de compartilhamentos
 
+| route                                 | Entrada                        | description                                                         |
+|---------------------------------------|--------------------------------|---------------------------------------------------------------------|
+| <kbd>GET /getAverage/{version}</kbd>  | version (Path Variable, Long)  | retorna a média de avaliações para a versão do serviço especificada |
+| <kbd>Get /getAverageOnDay</kbd>       | date (Request Body, LocalDate) | retorna a média diária de avaliações na data fornecida              |
+| <kbd>Get /getAllMedias</kbd>          | —                              | retorna a lista completa de todas as avaliações                     |
+| <kbd>Get /getShares</kbd>             | —                              | retorna a lista de compartilhamentos de usuários                    |
+| <kbd>Get /getPostInfo/{version}</kbd> | version (Path Variable, Long)  | retorna detalhes de avaliação (RatingDetailsDTO) da versão informada|
+
 ---
 ## Tecnologias Utilizadas
 

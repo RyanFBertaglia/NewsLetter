@@ -16,6 +16,7 @@ Para conseguir o máximo de controle sobre os componentes deste projeto separei 
 * Gera tokens JWT personalizados
 * Verifica e renova status de pagamento dos usuários
 * Controla acesso aos recursos da aplicação
+* ![criar conta pelo google](./img/telaOAuth2.png)
 
 ### Avaliar - Sistema de Avaliação Inteligente
 

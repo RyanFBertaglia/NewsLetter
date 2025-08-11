@@ -1,0 +1,18 @@
+#! envio-conteudo-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: envio-conteudo
+    namespace: newsletter
+    labels:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: envio-conteudo
+spec:
+    selector:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: envio-conteudo
+    ports:
+        - name: envio-cont-8084
+          port: 8084
+          targetPort: envio-cont-8084

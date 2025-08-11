@@ -1,0 +1,23 @@
+# check if there is at least one published port
+
+#! auth-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: auth-published
+    namespace: newsletter
+    labels:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: auth
+spec:
+    selector:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: auth
+    ports:
+        - name: auth-8080
+          port: 8080
+          protocol: TCP
+          targetPort: auth-8080
+
+# check if there is at least one published port

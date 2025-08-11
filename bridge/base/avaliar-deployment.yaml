@@ -1,0 +1,32 @@
+#! avaliar-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: avaliar
+    namespace: newsletter
+    labels:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: avaliar
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: newsletter
+            com.docker.compose.service: avaliar
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: newsletter
+                com.docker.compose.service: avaliar
+                com.docker.compose.network.app-network: "true"
+        spec:
+            containers:
+                - name: avaliar
+                  image: newsletter-avaliar
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - name: avaliar-8082
+                      containerPort: 8082

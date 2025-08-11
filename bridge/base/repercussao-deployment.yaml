@@ -1,0 +1,32 @@
+#! repercussao-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: repercussao
+    namespace: newsletter
+    labels:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: repercussao
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: newsletter
+            com.docker.compose.service: repercussao
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: newsletter
+                com.docker.compose.service: repercussao
+                com.docker.compose.network.app-network: "true"
+        spec:
+            containers:
+                - name: repercussao
+                  image: newsletter-repercussao
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - name: repercussa-8085
+                      containerPort: 8085

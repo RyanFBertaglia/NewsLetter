@@ -1,0 +1,18 @@
+#! auth-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: auth
+    namespace: newsletter
+    labels:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: auth
+spec:
+    selector:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: auth
+    ports:
+        - name: auth-8080
+          port: 8080
+          targetPort: auth-8080

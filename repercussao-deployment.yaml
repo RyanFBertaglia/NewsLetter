@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Program Files\Kompose\kompose.exe convert -f docker-compose.yml
+    kompose.version: 1.37.0 (fb0539e64)
+  labels:
+    io.kompose.service: repercussao
+  name: repercussao
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: repercussao
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\Program Files\Kompose\kompose.exe convert -f docker-compose.yml
+        kompose.version: 1.37.0 (fb0539e64)
+      labels:
+        io.kompose.service: repercussao
+    spec:
+      containers:
+        - image: repercussao
+          name: repercussao
+          ports:
+            - containerPort: 8085
+              protocol: TCP
+      restartPolicy: Always

@@ -1,0 +1,35 @@
+#! frontend-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: frontend
+    namespace: newsletter
+    labels:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: frontend
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: newsletter
+            com.docker.compose.service: frontend
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: newsletter
+                com.docker.compose.service: frontend
+                com.docker.compose.network.app-network: "true"
+        spec:
+            containers:
+                - name: frontend
+                  image: newsletter-frontend
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: VITE_API_AUTH
+                      value: "http://auth:8080"
+                  ports:
+                    - name: frontend-80
+                      containerPort: 80

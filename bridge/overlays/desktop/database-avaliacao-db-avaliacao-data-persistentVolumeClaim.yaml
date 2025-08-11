@@ -1,0 +1,9 @@
+#! database-avaliacao-db-avaliacao-data-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: database-avaliacao-db-avaliacao-data
+    namespace: newsletter
+spec:
+    storageClassName: "hostpath" # see docker/desktop-storage-provisioner

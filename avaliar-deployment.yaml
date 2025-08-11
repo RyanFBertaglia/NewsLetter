@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Program Files\Kompose\kompose.exe convert -f docker-compose.yml
+    kompose.version: 1.37.0 (fb0539e64)
+  labels:
+    io.kompose.service: avaliar
+  name: avaliar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: avaliar
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\Program Files\Kompose\kompose.exe convert -f docker-compose.yml
+        kompose.version: 1.37.0 (fb0539e64)
+      labels:
+        io.kompose.service: avaliar
+    spec:
+      containers:
+        - image: avaliar
+          name: avaliar
+          ports:
+            - containerPort: 8082
+              protocol: TCP
+      restartPolicy: Always

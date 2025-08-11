@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Program Files\Kompose\kompose.exe convert -f docker-compose.yml
+    kompose.version: 1.37.0 (fb0539e64)
+  labels:
+    io.kompose.service: envio-conteudo
+  name: envio-conteudo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: envio-conteudo
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\Program Files\Kompose\kompose.exe convert -f docker-compose.yml
+        kompose.version: 1.37.0 (fb0539e64)
+      labels:
+        io.kompose.service: envio-conteudo
+    spec:
+      containers:
+        - image: envio-conteudo
+          name: envio-conteudo
+          ports:
+            - containerPort: 8084
+              protocol: TCP
+      restartPolicy: Always

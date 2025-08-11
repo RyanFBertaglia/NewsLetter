@@ -1,0 +1,36 @@
+#! kustomization.yaml
+# Generated code, do not edit
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+    - 0-newsletter-namespace.yaml
+    - app-network-network-policy.yaml
+    - auth-deployment.yaml
+    - auth-expose.yaml
+    - auth-service.yaml
+    - avaliar-deployment.yaml
+    - avaliar-expose.yaml
+    - avaliar-service.yaml
+    - database-auth-db-auth-data-persistentVolumeClaim.yaml
+    - database-auth-deployment.yaml
+    - database-auth-expose.yaml
+    - database-auth-service.yaml
+    - database-avaliacao-db-avaliacao-data-persistentVolumeClaim.yaml
+    - database-avaliacao-deployment.yaml
+    - database-avaliacao-expose.yaml
+    - database-avaliacao-service.yaml
+    - enviar-deployment.yaml
+    - enviar-expose.yaml
+    - enviar-service.yaml
+    - envio-conteudo-deployment.yaml
+    - envio-conteudo-expose.yaml
+    - envio-conteudo-service.yaml
+    - frontend-deployment.yaml
+    - frontend-expose.yaml
+    - frontend-service.yaml
+    - rabbitmq-deployment.yaml
+    - rabbitmq-expose.yaml
+    - rabbitmq-service.yaml
+    - repercussao-deployment.yaml
+    - repercussao-expose.yaml
+    - repercussao-service.yaml

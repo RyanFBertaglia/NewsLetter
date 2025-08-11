@@ -1,0 +1,32 @@
+#! auth-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: auth
+    namespace: newsletter
+    labels:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: auth
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: newsletter
+            com.docker.compose.service: auth
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: newsletter
+                com.docker.compose.service: auth
+                com.docker.compose.network.app-network: "true"
+        spec:
+            containers:
+                - name: auth
+                  image: newsletter-auth
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - name: auth-8080
+                      containerPort: 8080

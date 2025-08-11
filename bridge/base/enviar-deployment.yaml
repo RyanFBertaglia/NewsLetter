@@ -1,0 +1,32 @@
+#! enviar-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: enviar
+    namespace: newsletter
+    labels:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: enviar
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: newsletter
+            com.docker.compose.service: enviar
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: newsletter
+                com.docker.compose.service: enviar
+                com.docker.compose.network.app-network: "true"
+        spec:
+            containers:
+                - name: enviar
+                  image: newsletter-enviar
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - name: enviar-8083
+                      containerPort: 8083

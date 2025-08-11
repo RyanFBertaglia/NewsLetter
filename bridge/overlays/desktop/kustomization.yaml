@@ -1,0 +1,18 @@
+#! kustomization.yaml
+# Generated code, do not edit
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+    - ../../base
+patches:
+    - path: auth-service.yaml
+    - path: avaliar-service.yaml
+    - path: database-auth-db-auth-data-persistentVolumeClaim.yaml
+    - path: database-auth-service.yaml
+    - path: database-avaliacao-db-avaliacao-data-persistentVolumeClaim.yaml
+    - path: database-avaliacao-service.yaml
+    - path: enviar-service.yaml
+    - path: envio-conteudo-service.yaml
+    - path: frontend-service.yaml
+    - path: rabbitmq-service.yaml
+    - path: repercussao-service.yaml

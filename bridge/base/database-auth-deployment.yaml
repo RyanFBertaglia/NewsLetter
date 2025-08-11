@@ -1,0 +1,47 @@
+#! database-auth-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: database-auth
+    namespace: newsletter
+    labels:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: database-auth
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: newsletter
+            com.docker.compose.service: database-auth
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: newsletter
+                com.docker.compose.service: database-auth
+                com.docker.compose.network.app-network: "true"
+        spec:
+            restartPolicy: unless-stopped
+            containers:
+                - name: database-auth
+                  image: postgres:latest
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: POSTGRES_DB
+                      value: "banco-de-dados"
+                    - name: POSTGRES_PASSWORD
+                      value: "minhasenha"
+                    - name: POSTGRES_USER
+                      value: "ryan"
+                  ports:
+                    - name: database-a-5432
+                      containerPort: 5432
+                  volumeMounts:
+                    - name: var-lib-postgresql-data
+                      mountPath: /var/lib/postgresql/data
+            volumes:
+                - name: var-lib-postgresql-data
+                  persistentVolumeClaim:
+                    claimName: database-auth-db-auth-data

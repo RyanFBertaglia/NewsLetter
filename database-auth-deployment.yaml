@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Program Files\Kompose\kompose.exe convert -f docker-compose.yml
+    kompose.version: 1.37.0 (fb0539e64)
+  labels:
+    io.kompose.service: database-auth
+  name: database-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: database-auth
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\Program Files\Kompose\kompose.exe convert -f docker-compose.yml
+        kompose.version: 1.37.0 (fb0539e64)
+      labels:
+        io.kompose.service: database-auth
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: banco-de-dados
+            - name: POSTGRES_PASSWORD
+              value: minhasenha
+            - name: POSTGRES_USER
+              value: ryan
+          image: postgres:latest
+          name: database-auth
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: db-auth-data
+      restartPolicy: Always
+      volumes:
+        - name: db-auth-data
+          persistentVolumeClaim:
+            claimName: db-auth-data

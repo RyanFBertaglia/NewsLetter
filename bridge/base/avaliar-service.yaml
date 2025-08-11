@@ -1,0 +1,21 @@
+#! avaliar-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: avaliar-published
+    namespace: newsletter
+    labels:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: avaliar
+spec:
+    selector:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: avaliar
+    ports:
+        - name: avaliar-8082
+          port: 8082
+          protocol: TCP
+          targetPort: avaliar-8082
+
+# check if there is at least one published port

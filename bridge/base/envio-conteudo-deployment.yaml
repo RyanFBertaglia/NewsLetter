@@ -1,0 +1,32 @@
+#! envio-conteudo-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: envio-conteudo
+    namespace: newsletter
+    labels:
+        com.docker.compose.project: newsletter
+        com.docker.compose.service: envio-conteudo
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: newsletter
+            com.docker.compose.service: envio-conteudo
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: newsletter
+                com.docker.compose.service: envio-conteudo
+                com.docker.compose.network.app-network: "true"
+        spec:
+            containers:
+                - name: envio-conteudo
+                  image: newsletter-envio-conteudo
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - name: envio-cont-8084
+                      containerPort: 8084

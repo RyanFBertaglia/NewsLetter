@@ -21,7 +21,7 @@ spec:
         io.kompose.service: auth
     spec:
       containers:
-        - image: auth
+        - image: ryanbertaglia/auth:latest
           name: auth
           ports:
             - containerPort: 8080

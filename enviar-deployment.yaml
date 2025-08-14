@@ -21,7 +21,7 @@ spec:
         io.kompose.service: enviar
     spec:
       containers:
-        - image: enviar
+        - image: ryanbertaglia/enviar:latest
           name: enviar
           ports:
             - containerPort: 8083

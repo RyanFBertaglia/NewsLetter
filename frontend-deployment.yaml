@@ -24,7 +24,7 @@ spec:
         - env:
             - name: VITE_API_AUTH
               value: http://auth:8080
-          image: frontend
+          image: ryanbertaglia/frontend:latest
           name: frontend
           ports:
             - containerPort: 80

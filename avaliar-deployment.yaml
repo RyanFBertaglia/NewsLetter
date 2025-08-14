@@ -21,7 +21,7 @@ spec:
         io.kompose.service: avaliar
     spec:
       containers:
-        - image: avaliar
+        - image: ryanbertaglia/avaliar:latest
           name: avaliar
           ports:
             - containerPort: 8082

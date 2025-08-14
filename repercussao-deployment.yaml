@@ -21,7 +21,7 @@ spec:
         io.kompose.service: repercussao
     spec:
       containers:
-        - image: repercussao
+        - image: ryanbertaglia/repercussao:latest
           name: repercussao
           ports:
             - containerPort: 8085

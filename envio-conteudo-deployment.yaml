@@ -21,7 +21,7 @@ spec:
         io.kompose.service: envio-conteudo
     spec:
       containers:
-        - image: envio-conteudo
+        - image: ryanbertaglia/envio-conteudo:latest
           name: envio-conteudo
           ports:
             - containerPort: 8084

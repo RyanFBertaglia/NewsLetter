@@ -46,6 +46,7 @@ services:
   auth:
     container_name: auth
     build: ./auth
+    image: ryanbertaglia/auth:latest
     ports:
       - "8080:8080"
     networks:
@@ -53,6 +54,7 @@ services:
 
   frontend:
     build: ./frontend
+    image: ryanbertaglia/frontend:latest
     ports:
       - "3000:80"
     networks:
@@ -64,6 +66,7 @@ services:
 
   avaliar:
     build: ./avaliar
+    image: ryanbertaglia/avaliar:latest
     ports:
       - "8082:8082"
     networks:
@@ -73,6 +76,7 @@ services:
 
   enviar:
     build: ./enviar
+    image: ryanbertaglia/enviar:latest
     ports:
       - "8083:8083"
     networks:
@@ -83,6 +87,7 @@ services:
 
   envio-conteudo:
     build: ./envio-conteudo
+    image: ryanbertaglia/envio-conteudo:latest
     ports:
       - "8084:8084"
     networks:
@@ -92,6 +97,7 @@ services:
 
   repercussao:
     build: ./repercussao
+    image: ryanbertaglia/repercussao:latest
     ports:
       - "8085:8085"
     networks:

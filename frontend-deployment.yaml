@@ -29,4 +29,12 @@ spec:
           ports:
             - containerPort: 80
               protocol: TCP
+          # CORREÇÃO: recursos devem ter subcampos requests/limits
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
       restartPolicy: Always

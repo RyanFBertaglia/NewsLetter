@@ -61,7 +61,7 @@ public class Statistics {
                 .orElseThrow(VersionNotFound::new);
         List<UserCommentDTO> usersComments = comments.findByVersion(version);
 
-        return new RatingDatailsDTO(rate.getVersion(),
+        return new RatingDatailsDTO(version,
                 rate.getDate_rate(),
                 rate.getAverage(),
                 usersComments);

@@ -4,6 +4,8 @@ auth/target/*
 envio-conteudo/target/*
 enviar/target/*
 avaliar/target/*
+repercussao/target/*
 .env
 *.properties
 todo.txt
+*.class

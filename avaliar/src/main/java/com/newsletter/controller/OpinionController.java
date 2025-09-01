@@ -28,7 +28,7 @@ public class OpnionController {
         double rate = opnionService.analyzeSentiment(message);
         rateService.updateAverage(message.version(), rate);
 
-        return ResponseEntity.ok("Thank you for answered this form");
+        return ResponseEntity.ok("Rate: " + rate);
     }
 
 }

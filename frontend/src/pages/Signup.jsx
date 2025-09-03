@@ -3,6 +3,11 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import { googleAuth } from '../services/authService';
+import styles from '../styles/home.module.css';
+import login from '../styles/auth.module.css';
+import { Link } from "react-router-dom";
+
+
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -35,44 +40,66 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md text-center">
-        <h1 className="text-2xl font-bold mb-6">Crie sua conta</h1>
-        <div className="mb-6 text-left">
-          <label htmlFor="name" className="block mb-2 text-gray-700 font-medium">Nome Completo</label>
-          <input
-            id="name" value={name}
-            onChange={e => setName(e.target.value)}
-            onBlur={validateName}
-            disabled={isLoading}
-            placeholder="Digite seu nome completo"
-            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-              nameError ? 'border-red-500 focus:ring-red-200' : 'border-gray-300 focus:ring-blue-200'
-            }`}
-          />
-          {nameError && <p className="mt-1 text-red-500 text-sm">{nameError}</p>}
-        </div>
-
-        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-          <GoogleLogin
-            onSuccess={({ credential }) => handleGoogleAuth(credential)}
-            onError={() => alert('Falha na autenticação com Google')}
-            useOneTap text="signup_with" size="large" width="350"
-            locale="pt_BR" disabled={isLoading || !name.trim()}
-          />
-        </GoogleOAuthProvider>
-
-        {isLoading && (
-          <div className="mt-4 flex items-center justify-center">
-            <div className="loader border-t-2 border-b-2 border-blue-500 h-5 w-5 rounded-full animate-spin"></div>
-            <span className="ml-2 text-gray-600">Processando...</span>
+    <div className={styles.container}>
+      <nav className={`${styles.nav} navMobile`}>
+        <Link to="/">
+          <div className={styles.navLogo} >
+            <div className={styles.logoCircle}>
+              <svg style={{width: '16px', height: '16px', color: 'white'}} fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+              </svg>
+            </div>
           </div>
-        )}
-
-        <p className="mt-4 text-sm text-gray-600">
-          Ao se cadastrar, você concorda com nossos Termos de Serviço e Política de Privacidade
-        </p>
+        </Link>  
+          <div className={`${styles.navCenter} navCenterMobile`}>
+            <a href="#" className={`${styles.navLink} navLink`}>Produtos</a>
+            <a href="#" className={`${styles.navLink} navLink`}>Preços</a>
+            <a href="#" className={`${styles.navLink} navLink`}>Contact</a>
+          </div>
+          
+        </nav>
+      <div className={login.formLogin}>
+    <form className={login.formContent}>
+      <div className={login.inputGroup}>
+        <label htmlFor="name">Nome Completo</label>
+        <input
+          id="name"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          onBlur={validateName}
+          disabled={isLoading}
+          placeholder="Digite seu nome completo"
+        />
+        {nameError && <p className={login.error}>{nameError}</p>}
       </div>
+
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+        <GoogleLogin
+          onSuccess={({ credential }) => handleGoogleAuth(credential)}
+          onError={() => alert('Falha na autenticação com Google')}
+          useOneTap
+          text="signup_with"
+          size="large"
+          width="100%"
+          locale="pt_BR"
+          disabled={isLoading || !name.trim()}
+        />
+      </GoogleOAuthProvider>
+
+      {isLoading && (
+        <div className={login.loading}>
+          <div className={login.loader}></div>
+          <span>Processando...</span>
+        </div>
+      )}
+
+    <p className={login.terms}>
+      Ao se cadastrar, você concorda com nossos <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>
+    </p>
+  </form>
+</div>
+
 
       <style jsx>{`
         .loader { animation: spin 1s linear infinite; }

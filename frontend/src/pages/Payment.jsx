@@ -31,7 +31,6 @@ const Payment = ({ userToken }) => {
 
   return (
     <div className="payment-container">
-      <h2>Finalizar Pagamento</h2>
       <ProductDisplay 
         onCheckout={handleCheckout}
         isLoading={isLoading}

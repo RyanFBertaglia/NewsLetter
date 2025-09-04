@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import styles from '../styles/home.module.css';
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [showSuccess, setShowSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const handleEntrar = () => {
     setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 2000);
+    setTimeout(() => {
+      setShowSuccess(false);
+      navigate("/cadastro");
+    }, 2000);
   };
 
   const handleVerMais = () => {
@@ -16,57 +21,6 @@ export default function Home() {
   return (
     <>
       <style>{`
-        .btnPrimary:hover {
-          background: #dc2626 !important;
-          transform: scale(1.05);
-        }
-        
-        .btnSecondary:hover {
-          background: #111827 !important;
-          transform: scale(1.05);
-        }
-        
-        .navLink:hover {
-          color: #111827 !important;
-        }
-        
-        .btnLogin:hover {
-          background: #dcfce7 !important;
-        }
-        
-        .btnRegister:hover {
-          background: #111827 !important;
-        }
-
-        @media (max-width: 768px) {
-          .navMobile {
-            grid-template-columns: auto 1fr !important;
-            gap: 1rem;
-          }
-          
-          .navCenterMobile {
-            display: none !important;
-          }
-          
-          .navActionsMobile {
-            grid-template-columns: auto !important;
-            gap: 0.5rem;
-          }
-          
-          .titleMobile {
-            font-size: 3rem !important;
-          }
-          
-          .buttonActionsMobile {
-            grid-template-columns: 1fr !important;
-            gap: 0.75rem;
-          }
-          
-          .btnFull {
-            width: 100%;
-            justify-content: center;
-          }
-        }
 
         @media (max-width: 480px) {
           .titleSmall {
@@ -85,14 +39,16 @@ export default function Home() {
 
       <div className={styles.container}>
         <nav className={`${styles.nav} navMobile`}>
-          <div className={styles.navLogo}>
-            <div className={styles.logoCircle}>
-              <svg style={{width: '16px', height: '16px', color: 'white'}} fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-              </svg>
-            </div>
-          </div>
+          <Link to="/">
+                    <div className={styles.navLogo} >
+                      <div className={styles.logoCircle}>
+                        <svg style={{width: '16px', height: '16px', color: 'white'}} fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                        </svg>
+                      </div>
+                    </div>
+          </Link>  
           
           <div className={`${styles.navCenter} navCenterMobile`}>
             <a href="#" className={`${styles.navLink} navLink`}>Produtos</a>
@@ -101,8 +57,8 @@ export default function Home() {
           </div>
           
           <div className={`${styles.navActions} navActionsMobile`}>
-            <button className={`${styles.btnLogin} btnLogin`}>Login</button>
-            <button className={`${styles.btnRegister} btnRegister`}>Registrar</button>
+            <Link to="/cadastro" className={`${styles.btnLogin} btnLogin`}>Login</Link>
+            <Link to="/cadastro" className={`${styles.btnRegister} btnRegister`}>Registrar</Link>
           </div>
         </nav>
 
@@ -138,10 +94,6 @@ export default function Home() {
               </button>
             </div>
           </div>
-
-          <div className={`${styles.decoration1} decorationHidden`}></div>
-          <div className={`${styles.decoration2} decorationHidden`}></div>
-          <div className={`${styles.decoration3} decorationHidden`}></div>
 
           {showSuccess && (
             <div className={styles.successMessage}>

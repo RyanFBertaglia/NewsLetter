@@ -180,45 +180,6 @@
     transform: scale(1.05);
 }
 
-/* Elementos decorativos */
-.decoration1 {
-    position: absolute;
-    top: 5rem;
-    left: 5rem;
-    width: 8rem;
-    height: 8rem;
-    background: #bbf7d0;
-    border-radius: 50%;
-    opacity: 0.3;
-    animation: pulse 3s ease-in-out infinite;
-}
-
-.decoration2 {
-    position: absolute;
-    bottom: 5rem;
-    right: 5rem;
-    width: 6rem;
-    height: 6rem;
-    background: #fecaca;
-    border-radius: 50%;
-    opacity: 0.3;
-    animation: pulse 3s ease-in-out infinite;
-    animation-delay: 1s;
-}
-
-.decoration3 {
-    position: absolute;
-    top: 50%;
-    left: 2.5rem;
-    width: 4rem;
-    height: 4rem;
-    background: #bfdbfe;
-    border-radius: 50%;
-    opacity: 0.3;
-    animation: pulse 3s ease-in-out infinite;
-    animation-delay: 2s;
-}
-
 /* Mensaje de éxito */
 .successMessage {
     position: fixed;
@@ -254,11 +215,5 @@
     
     .buttonActions {
         grid-template-columns: 1fr;
-    }
-    
-    .decoration1, 
-    .decoration2, 
-    .decoration3 {
-        display: none;
     }
 }

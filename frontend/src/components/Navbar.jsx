@@ -52,7 +52,7 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <Link to="/login" className={styles.btnLogin}>
+            <Link to="/cadastro" className={styles.btnLogin}>
               Login
             </Link>
             <Link to="/cadastro" className={styles.btnRegister}>

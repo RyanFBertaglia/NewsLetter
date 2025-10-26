@@ -14,6 +14,7 @@ export default function Home() {
       navigate("/cadastro");
     }, 2000);
   };
+  console.log(localStorage.getItem('jwtToken'));
 
   const handleVerMais = () => {
     alert('Navegando para mais informações...');

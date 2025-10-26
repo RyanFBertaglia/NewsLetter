@@ -14,9 +14,8 @@ function App() {
         <Route path="/cadastro" element={<Signup />} />
         <Route path="/pagamento" element={<Payment />} />
         <Route path="/produto" element={<ProductDisplay />} />
-        <Route path="/pagamento/success" element={<ThankYou />} />
+        <Route path="/pagamento/:status" element={<ThankYou />} />
         <Route path="/sobre" element={<AboutMe />} />
-        <Route path="/pagamento/canceled" element={<ThankYou />} />
       </Routes>
     </BrowserRouter>
   );

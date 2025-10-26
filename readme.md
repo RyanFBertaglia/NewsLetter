@@ -3,6 +3,8 @@
 ## Descrição:
 Este projeto tem como objetivo criar uma newsletter funcional e escalável, utilizando o serviço de e-mail SendGrid para garantir o envio confiável das mensagens e a API do Stripe para gerenciar os pagamentos de forma segura e integrada
 
+![Home Page](./img/homePage.png)
+
 ---
 ## Microserviços:
 Para conseguir o máximo de controle sobre os componentes deste projeto separei as responsabilidades em microserviços, os quais são expostos ou se comunicam através da expose direto na rede (localhost), serviço de mensageria (RabbitMQ) ou sobre a camada de rede do docker-compose (bridge)
@@ -16,7 +18,8 @@ Para conseguir o máximo de controle sobre os componentes deste projeto separei 
 * Gera tokens JWT personalizados
 * Verifica e renova status de pagamento dos usuários
 * Controla acesso aos recursos da aplicação
-* ![criar conta pelo google](./img/telaOAuth2.png)
+
+![criar conta pelo google](./img/telaOAuth2.png)
 
 ### Avaliar - Sistema de Avaliação Inteligente
 
@@ -25,6 +28,7 @@ Para conseguir o máximo de controle sobre os componentes deste projeto separei 
 * Atribui notas baseadas na análise do comentário
 * Salva feedback do usuário no banco de dados
 * Atualiza nota média da respectiva versão do produto
+
 ![testes avaliações](./img/testsOpinion.png)
 
 ### Enviar - Processamento de E-mails
@@ -44,6 +48,16 @@ Para conseguir o máximo de controle sobre os componentes deste projeto separei 
 * Após expiração do tempo, redireciona para fila de processamento
 
 ![testes avaliações](./img/agendar.png)
+
+### Frontend - Apresentação, CTA e pagamento
+
+* Cadastro de usuários via protocolo OAuth2
+* Pagamento via API do Stripe
+* Apresentação de produtos e versões
+
+![produto](./img/pagar.png)
+![confirmar](./img/cartao.png)
+![obrigado](./img/thank-you.png)
 
 
 ### Repercussão - Analytics e Relatórios

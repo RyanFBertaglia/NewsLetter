@@ -5,6 +5,11 @@ export const api = axios.create({
   timeout: 10000,
 });
 
+export const apiAvaliar = axios.create({
+    baseURL: import.meta.env.VITE_API_AVALIAR || 'http://localhost:8082',
+    timeout: 10000,
+})
+
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
   if (token) {

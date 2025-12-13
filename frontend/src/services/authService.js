@@ -1,4 +1,5 @@
 import { api } from './api';
+import { jwtDecode } from 'jwt-decode';
 
 
 export async function googleAuth(name, idToken) {
@@ -13,13 +14,11 @@ export async function googleAuth(name, idToken) {
       idToken: idToken
     });
     if (res.status === 200) {
-      localStorage.setItem('jwtToken', res.data);
       return res.data;
     }
   } catch (err) {
     if (err.response?.status === 409) {
       const loginRes = await login(idToken);
-      localStorage.setItem('jwtToken', loginRes.data);
       return loginRes;
     }
     throw err;
@@ -29,5 +28,28 @@ export async function googleAuth(name, idToken) {
 export async function login(idToken) {
   const res = await api.post('/auth/google-login', { idToken: idToken });
   if (res.status !== 200) throw new Error("Não foi possível fazer login");
-  return res.data;
+  const token = res.data;
+  return token;
+}
+
+export function getUserInfo() {
+
+  try {
+    const decoded = jwtDecode(localStorage.getItem('jwtToken'));
+    const username = localStorage.getItem('username');
+
+    return {
+      id: decoded.userId || decoded.sub,
+      email: decoded.email,
+      name: username,
+    };
+  } catch (error) {
+    console.error('Erro ao decodificar token:', error);
+    return null;
+  }
+}
+
+export function logout() {
+  localStorage.removeItem('jwtToken');
+  delete api.defaults.headers.common['Authorization'];
 }

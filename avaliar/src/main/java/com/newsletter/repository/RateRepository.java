@@ -14,4 +14,7 @@ public interface RateRepository extends JpaRepository<Rate, Long> {
     @Query("select r from Rate r where r.version = :version")
     Optional<Rate> findByVersionForUpdate(Long version);
 
+    @Query("select r from Rate r where r.version = :version")
+    Optional<Rate> findByVersion(Long version);
+
 }

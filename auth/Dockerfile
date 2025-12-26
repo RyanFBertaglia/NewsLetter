@@ -1,4 +1,3 @@
-# Stage 1: Build stage
 FROM maven:3.9.6-eclipse-temurin-17-alpine AS builder
 
 WORKDIR /app

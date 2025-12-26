@@ -14,10 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.Paths;
 
 import com.stripe.Stripe;
 import com.stripe.model.checkout.Session;
@@ -92,6 +90,12 @@ public class AuthController {
         User user = jwtTokenService.getUser(request);
         userService.renovarValidade(user);
         return ResponseEntity.ok().body("Renovated successfully");
+    }
+
+    @GetMapping("/id")
+    public ResponseEntity<String> getUserId(HttpServletRequest request) {
+        User user = jwtTokenService.getUser(request);
+        return ResponseEntity.ok().body(user.getId().toString());
     }
 
     @PostMapping("/pagamento")

@@ -30,6 +30,8 @@ export default function Signup() {
     try {
         console.log(idToken, name);
         const tokenJwt = await googleAuth(name, idToken);
+        localStorage.setItem('jwtToken', tokenJwt);
+        localStorage.setItem('username', name);
         navigate('/pagamento');
     } catch (e) {
         alert('Falha no registro: ' + (e.response?.data || e.message));

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/aboutMe.module.css";
 import elements from "../styles/elements.module.css";
 import Navbar from "../components/Navbar.jsx";

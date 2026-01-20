@@ -5,6 +5,7 @@ import Payment from './pages/Payment';
 import ProductDisplay from './components/ProductDisplay';
 import ThankYou from './pages/ThankYou';
 import AboutMe from './pages/AboutMe';
+import Comment from './pages/Comment';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/produto" element={<ProductDisplay />} />
         <Route path="/pagamento/:status" element={<ThankYou />} />
         <Route path="/sobre" element={<AboutMe />} />
+        <Route path="/comentar/:id" element={<Comment />} />
       </Routes>
     </BrowserRouter>
   );

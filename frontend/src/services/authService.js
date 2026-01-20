@@ -53,3 +53,12 @@ export function logout() {
   localStorage.removeItem('jwtToken');
   delete api.defaults.headers.common['Authorization'];
 }
+
+export async function getInternalId() {
+  const res = await api.get('/auth/id', {
+    headers: { Authorization: `Bearer ${localStorage.getItem("jwtToken")}` }
+  });
+  console.log(res.data);
+  console.log(localStorage.getItem("jwtToken"));
+  return res.data;
+}

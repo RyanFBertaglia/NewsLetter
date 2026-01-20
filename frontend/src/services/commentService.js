@@ -23,7 +23,7 @@ export async function createComment(commentData) {
       throw new Error('Todos os campos são obrigatórios: message, idUser, version');
     }
 
-    const response = await api.post('/sendComment',
+    const response = await apiAvaliar.post('/sendComment',
       { message, version },
       {
         params: {
